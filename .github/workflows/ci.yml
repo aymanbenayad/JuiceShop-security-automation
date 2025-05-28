@@ -23,13 +23,12 @@ jobs:
           pip install -r requirements.txt
           python -m nltk.downloader punkt stopwords
       
-      - name: Build Docker image
-        run: docker build -f app/Dockerfile -t my-juice-shop:latest ./app
-      
-      - name: Run Juice Shop
-        run: |
-          docker run -d --name juice-shop -p 3000:3000 my-juice-shop:latest
-          sleep 15
+      - name: Pull Juice Shop image
+        run: docker pull bkimminich/juice-shop
+
+      - name: Run Juice Shop container
+        run: docker run -d --name juice-shop -p 127.0.0.1:3000:3000 bkimminich/juice-shop
+             sleep 15
       
       - name: Run tests
         run: pytest tests/ || echo "No tests found"
