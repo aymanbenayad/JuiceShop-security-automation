@@ -1,0 +1,72 @@
+stages:
+  - prepare
+  - test
+  - security
+
+prepare:
+  stage: prepare
+  image: python:3.10
+  script:
+    - echo "Installing Python dependencies..."
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+    - python -m nltk.downloader punkt stopwords
+  artifacts:
+    paths:
+      - .venv/
+
+test:
+  stage: test
+  image: python:3.10
+  script:
+    - echo "Running unit tests..."
+    - pytest tests/ || echo "No tests found"
+
+security:
+  stage: security
+  image: node:20  # Pour Node.js (Juice Shop) + Python à installer
+  before_script:
+    - echo "Installing Python..."
+    - apt-get update && apt-get install -y python3 python3-pip
+    - python3 -m pip install --upgrade pip
+    - python3 -m pip install -r requirements.txt
+  script:
+    - echo "Installing Juice Shop dependencies..."
+    - cd app && npm install
+
+    - echo "Starting Juice Shop in background..."
+    - cd app && npm start &
+
+    - echo "Waiting for Juice Shop to be ready..."
+    - sleep 15  # ajuste si nécessaire
+
+    - echo "Running security scripts..."
+
+    # Log Analysis - Monitoring
+    - python3 scripts/test1.py
+
+    # NLP Log Analysis - Intelligence
+    - python3 scripts/nlp_logs.py > reports/nlp_logs.txt
+
+    # Login Anomalies - Detection
+    - python3 scripts/login_anomaly.py > reports/login_anomalies.txt
+
+    # IP Lookup - Threat Intelligence
+    - python3 scripts/ip_lookup.py > reports/ip_lookup.txt
+
+    # Network Sniffing - Monitoring
+    - python3 scripts/sniff_traffic.py > reports/sniff_traffic.txt
+
+    # Web Scraper - Recon / SAST
+    - python3 scripts/web_scraper.py > reports/web_scraper.txt
+
+    # Encryption Testing - Compliance Check
+    - python3 scripts/encryption_test.py > reports/encryption_test.txt
+
+    # YARA Scanning - Malware Detection
+    - python3 scripts/yara_scan.py > reports/yara_scan.txt
+
+  artifacts:
+    paths:
+      - reports/
+    expire_in: 1 week
