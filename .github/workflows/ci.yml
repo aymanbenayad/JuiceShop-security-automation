@@ -24,7 +24,7 @@ jobs:
           python -m nltk.downloader punkt stopwords
       
       - name: Build Docker image
-        run: docker build -t my-juice-shop:latest ./app
+        run: docker build -f app/Dockerfile -t my-juice-shop:latest ./app
       
       - name: Run Juice Shop
         run: |
