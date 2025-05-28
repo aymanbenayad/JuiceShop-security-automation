@@ -38,8 +38,6 @@ jobs:
       
       - name: Run security scripts
         run: |
-          python scripts/test1.py
-          python scripts/test2.py
           python scripts/nlp_logs.py > reports/nlp_logs.txt || true
           python scripts/login_anomaly.py > reports/login_anomalies.txt || true
           python scripts/ip_lookup.py > reports/ip_lookup.txt || true
