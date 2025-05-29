@@ -7,8 +7,7 @@ print("Sniffing network in progress...")
 port = 3000
 n = 100
 app = f"tcp port {port}"
-interface = '\\Device\\NPF_Loopback' #localhost
-
+interface = 'lo'
 
 current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 traffic_file = f"traffic_{current_time}.pcap"
@@ -22,7 +21,6 @@ def handle_packet(pkt):
             print(pkt[Raw].load.decode(errors='ignore'))
         except:
             pass
-    
     packets.append(pkt)
 
 sniff(filter=app, count=n, iface=interface, prn=handle_packet)
@@ -30,5 +28,3 @@ sniff(filter=app, count=n, iface=interface, prn=handle_packet)
 if packets:
     wrpcap(traffic_file, packets)
     print(f"Traffic saved in {traffic_file}")
-
-

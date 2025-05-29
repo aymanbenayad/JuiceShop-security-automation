@@ -3,6 +3,7 @@ numpy
 nltk
 scikit-learn
 scapy
+datetime
 beautifulsoup4
 cryptography
 yara-python
