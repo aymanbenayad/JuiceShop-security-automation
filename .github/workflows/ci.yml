@@ -29,8 +29,9 @@ jobs:
         run: docker pull bkimminich/juice-shop
 
       - name: Run Juice Shop container
-        run: docker run -d --name juice-shop --network=host -p 3000:3000 bkimminich/juice-shop
-             sleep 15
+        run: docker run -d --name juice-shop -p 3000:3000 bkimminich/juice-shop
+             sleep 30
+             docker ps | grep juice-shop
       
       - name: Run tests
         run: pytest tests/ || echo "No tests found"
