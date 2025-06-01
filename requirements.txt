@@ -1,2 +1,8 @@
+yaranltk
+scikit-learn
+scapy
+datetime
+beautifulsoup4
+cryptography
+yara-python
 yara
-requests
