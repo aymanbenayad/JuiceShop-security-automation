@@ -296,9 +296,9 @@ rule Sensitive_DataExposure {
         author = "Security Analyst"
         date = "2025-05-15"
     strings:
-        $cc = /\b4[0-9]{12}(?:[0-9]{3})?\b/ nocase wide ascii
-        $ssn = /\b[0-9]{3}-[0-9]{2}-[0-9]{4}\b/ nocase wide ascii
-        $email = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b/ nocase wide ascii
+        $cc = /4[0-9]{12}([0-9]{3})?/ nocase wide ascii
+        $ssn = /[0-9]{3}-[0-9]{2}-[0-9]{4}/ nocase wide ascii
+        $email = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}/ nocase wide ascii
         $pwd1 = "password" nocase wide ascii
         $pwd2 = "passwd" nocase wide ascii
         $pwd3 = "secret" nocase wide ascii
@@ -310,6 +310,7 @@ rule Sensitive_DataExposure {
     condition:
         any of them
 }
+
 
 rule Remote_CodeExecution {
     meta:
