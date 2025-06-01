@@ -1,6 +1,15 @@
 import "hash"
 import "math"
 
+
+rule test_match {
+    strings:
+        $html = "<html"
+        $body = "<body"
+    condition:
+        any of them
+}
+
 rule XSSPayload {
     meta:
         description = "Détecte les charges utiles XSS courantes dans les fichiers"
