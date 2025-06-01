@@ -35,7 +35,7 @@ if __name__ == "__main__":
     rule_path = os.path.join(base_dir, "rules.yar")
     
     # Change l’URL en dossier à scanner
-    directory_to_scan = os.path.join(base_dir, "../app")  
+    directory_to_scan = os.path.join(base_dir, "../juiceshop")  
 
     if not os.path.exists(rule_path):
         print(f"[!] Rule file not found: {rule_path}")
