@@ -29,7 +29,7 @@ jobs:
         run: docker pull bkimminich/juice-shop
 
       - name: Run Juice Shop container
-        run: docker run -d --name juice-shop -p 3000:3000 bkimminich/juice-shop
+        run: docker run -d --name juice-shop --network=host -p 3000:3000 bkimminich/juice-shop
              sleep 15
       
       - name: Run tests
