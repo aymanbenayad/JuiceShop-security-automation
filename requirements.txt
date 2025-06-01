@@ -6,4 +6,3 @@ scapy
 beautifulsoup4
 cryptography
 yara-python
-yara
