@@ -30,7 +30,10 @@ def scan_url(url, rules):
 
 if __name__ == "__main__":
     url = "http://localhost:3000"
-    rule_path = "./rules.yar"
+
+    # Calcule le chemin absolu du script
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    rule_path = os.path.join(base_dir, "rules.yar")
 
     if not os.path.exists(rule_path):
         print(f"[!] Rule file not found: {rule_path}")
