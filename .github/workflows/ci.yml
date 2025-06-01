@@ -38,6 +38,7 @@ jobs:
       
       - name: Run security scripts
         run: |
+          python scripts/yarascan.py > reports/yarascan.txt || true
           python scripts/network_sniffing.py > reports/network_sniffing.txt || true
           python scripts/nlplog.py > reports/nlplog.txt || true
           python scripts/log_anomaly_dashboard_autoloady.py > reports/log_anomaly_dashboard_autoload.txt || true
@@ -45,7 +46,6 @@ jobs:
           python scripts/sqlscanner.py > reports/sqlscanner.txt || true
           python scripts/web_scraper.py > reports/web_scraper.txt || true
           python scripts/crypto.py > reports/crypto.txt || true
-          python scripts/yarascan.py > reports/yarascan.txt || true
       
       - name: Upload reports
         uses: actions/upload-artifact@v4
