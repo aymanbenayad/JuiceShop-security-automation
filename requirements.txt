@@ -1,6 +1,4 @@
 pandas
-re
-argparse
 numpy
 nltk
 scikit-learn
