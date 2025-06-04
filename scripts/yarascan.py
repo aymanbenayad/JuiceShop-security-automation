@@ -13,7 +13,6 @@ def scan_directory(directory, rules):
     for root, _, files in os.walk(directory):
         for file in files:
             file_path = os.path.join(root, file)
-            print(f"[+] Scanning file: {file_path}")
             try:
                 with open(file_path, "rb") as f:
                     content = f.read()
@@ -24,8 +23,6 @@ def scan_directory(directory, rules):
                         print(f" - Rule matched: {match.rule}")
                         if match.meta:
                             print(f" - Meta info: {match.meta}")
-                else:
-                    print("[+] No matches found in this file.")
             except Exception as e:
                 print(f"[!] Error reading file {file_path}: {e}")
 

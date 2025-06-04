@@ -1,4 +1,6 @@
 pandas
+re
+argparse
 numpy
 nltk
 scikit-learn
@@ -6,4 +8,4 @@ scapy
 beautifulsoup4
 cryptography
 yara-python
-requests
+requests  
