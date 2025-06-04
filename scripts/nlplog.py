@@ -26,7 +26,7 @@ if __name__ == "__main__":
     
     try:
         # Read CSV log file
-        log_df = pd.read_csv("log.csv")
+        log_df = pd.read_csv("logs/nlp.csv")
         
         # Check for leaks
         if not scan_logs_for_leaks(log_df):
