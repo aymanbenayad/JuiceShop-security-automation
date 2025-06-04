@@ -47,4 +47,3 @@ class TestEncryption:
         encrypted2 = encryption(test_str, self.key)
         assert encrypted1 != encrypted2  # Different IVs should produce different ciphertexts
 
-
