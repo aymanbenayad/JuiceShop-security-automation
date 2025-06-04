@@ -25,12 +25,12 @@ jobs:
           pip install -r requirements.txt
           python -m nltk.downloader punkt stopwords
       
-      - name: Build Juice Shop image from Dockerfile
-        run: docker build -t juice-shop:latest juiceshop
+      - name: Build Juice Shop 
+        run: docker pull bkimminich/juice-shop
 
       - name: Run Juice Shop container
         run: |
-            docker run -d --name juice-shop -p 3000:3000 juice-shop:latest
+            docker run -d --name juice-shop -p 3000:3000 bkimminich/juice-shop
             sleep 30
             docker ps | grep juice-shop
       
