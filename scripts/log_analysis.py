@@ -7,7 +7,7 @@ threat_patterns = {
     'SQLi': [r"' OR 1=1", r'UNION SELECT', r'DROP TABLE', r'--'],
     'XSS': [r'<script>', r'onerror=', r'alert\(', r'<svg', r'<img'],
     'Admin_Breach': [r'/admin', r'/api/Admin', r'role=admin'],
-    'Sensitive_Access': ['/rest', '/api', '/profile', '/config']
+    'Sensitive_Access': [r'/rest', r'/api', r'/profile', r'/config']
 }
 
 def detect_threats(df):
@@ -37,13 +37,25 @@ def show_threat_details(df):
                 print(f"{row['timestamp']} | {row['event']} | {row['message']}")
 
 def main():
-    df = detect_threats(df)
-    stats = generate_stats(df)
+    df_threats = detect_threats(df)
+    
+    # Ajout de la colonne reason vide
+    if 'reason' not in df_threats.columns:
+        df_threats['reason'] = ""
+
+    # Détection de patterns suspects dans user_id
+    sql_pattern = r"' OR 1=1|UNION SELECT|DROP TABLE|--"
+    df_threats.loc[
+        df_threats['user_id'].astype(str).str.contains(sql_pattern, case=False, na=False, regex=True),
+        'reason'
+    ] += "Suspicious user_id (SQL injection); "
+
+    stats = generate_stats(df_threats)
     print("=== Statistiques générales ===")
     for k, v in stats.items():
         print(f"{k}: {v}")
     print("\n=== Détails des menaces détectées ===")
-    show_threat_details(df)
+    show_threat_details(df_threats)
 
 if __name__ == "__main__":
     main()

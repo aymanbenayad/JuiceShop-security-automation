@@ -42,13 +42,27 @@ jobs:
       
       - name: Run security scripts
         run: |
-          python scripts/yarascan.py > reports/yarascan.txt || true
-          python scripts/nlplog.py > reports/nlplog.txt || true
-          python scripts/log_anomaly.py --file logs/logins.csv > reports/log_anomaly.html || true
-          python scripts/log_analysis.py > reports/log_analysis.txt || true
-          python scripts/ip_lookup.py > reports/ip_lookup.txt || true
-          python scripts/web_scraper.py > reports/web_scraper.txt || true
-          python scripts/crypto.py > reports/crypto.txt || true
+          echo "<---------------Yara Scan Report--------------->" > reports/yarascan.txt
+          python scripts/yarascan.py >> reports/yarascan.txt || true
+
+          echo "<---------------NLP Log Report--------------->" > reports/nlplog.txt
+          python scripts/nlplog.py >> reports/nlplog.txt || true
+
+          echo "<---------------Log Anomaly Report--------------->" > reports/log_anomaly.html
+          python scripts/log_anomaly.py --file logs/logins.csv >> reports/log_anomaly.html || true
+
+          echo "<---------------Log Analysis Report--------------->" > reports/log_analysis.txt
+          python scripts/log_analysis.py >> reports/log_analysis.txt || true
+
+          echo "<---------------IP Lookup Report--------------->" > reports/ip_lookup.txt
+          python scripts/ip_lookup.py >> reports/ip_lookup.txt || true
+
+          echo "<---------------Web Scraper Report--------------->" > reports/web_scraper.txt
+          python scripts/web_scraper.py >> reports/web_scraper.txt || true
+
+          echo "<---------------Crypto Report--------------->" > reports/crypto.txt
+          python scripts/crypto.py >> reports/crypto.txt || true
+
       
       - name: Upload reports
         uses: actions/upload-artifact@v4
