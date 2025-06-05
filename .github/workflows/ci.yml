@@ -44,7 +44,8 @@ jobs:
         run: |
           python scripts/yarascan.py > reports/yarascan.txt || true
           python scripts/nlplog.py > reports/nlplog.txt || true
-          python scripts/log_anomaly.py --file logs/logins.csv > reports/log_anomaly.txt || true
+          python scripts/log_anomaly.py --file logs/logins.csv > reports/log_anomaly.html || true
+          python scripts/log_analysis.py > reports/log_analysis.txt || true
           python scripts/ip_lookup.py > reports/ip_lookup.txt || true
           python scripts/web_scraper.py > reports/web_scraper.txt || true
           python scripts/crypto.py > reports/crypto.txt || true
